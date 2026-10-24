@@ -4,13 +4,15 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#143D32">
-  <meta name="description" content="Report civic issues, explore community reports, and view problem locations across India.">
+  <meta name="description" content="Discover local household services and explore service requests and listed workers across India.">
   <title>Work Satthi — Find Local Services</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
+  <script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script defer src="supabase-config.js"></script>
   <script defer src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
   <script defer src="community.js"></script>
 </head>
@@ -20,7 +22,7 @@
       <a class="brand" href="index.html"><img class="brand-logo" src="logo.svg" alt=""><span class="brand-text">Work <em>Satthi</em></span></a>
       <button class="menu-toggle" id="menu-toggle" aria-label="Open navigation menu" aria-expanded="false" aria-controls="nav-links"><span class="menu-toggle-icon" aria-hidden="true"><span></span><span></span><span></span></span></button>
       <div class="nav-links" id="nav-links">
-        <a href="index.html">Home</a><a href="community.html" aria-current="page">Explore map</a><a href="#report-form">Report an issue</a><a href="#community-reports">Community reports</a>
+        <a href="index.html">Home</a><a href="community.html" aria-current="page">Explore map</a><a href="#report-form">Request a service</a><a href="#community-reports">Service requests</a>
       </div>
       <a class="nav-cta" href="#report-form"><span>＋ Report</span></a>
     </nav>
@@ -33,14 +35,14 @@
           <p class="eyebrow"><span class="eyebrow-dot"></span> Find trusted local services</p>
           <h1>Need a service?<br><em>Find help nearby.</em></h1>
           <p class="community-lead">Explore local service categories and view service requests on the map across India.</p>
-          <div class="hero-actions"><a class="button button-primary" href="#report-form">Report an issue <span aria-hidden="true">→</span></a><a class="button button-secondary" href="#explore-map">Explore the map</a></div>
+          <div class="hero-actions"><a class="button button-primary" href="#report-form">Request a service <span aria-hidden="true">→</span></a><a class="button button-secondary" href="#explore-map">Explore the map</a></div>
           <p class="community-note">Work Satthi helps people discover local household services.</p>
         </div>
         <div class="community-stat-card">
           <span class="stat-label">Service map</span>
           <strong id="report-total">0</strong><span>service requests on this device</span>
           <div class="stat-divider"></div>
-          <strong id="category-total">8</strong><span>service categories</span>
+          <strong id="category-total">6</strong><span>service categories</span>
           <p>This prototype currently stores requests in this browser only.</p>
         </div>
       </div>
@@ -52,13 +54,13 @@
         <button class="button button-secondary" id="locate-me" type="button">◎ Use my location</button>
       </div>
       <div class="map-layout">
-        <div class="map-panel"><div id="india-map" role="application" aria-label="Interactive map of India showing community issue reports"></div><div class="map-footnote">Map data © OpenStreetMap contributors. Your location is requested only after you tap the location button.</div></div>
+        <div class="map-panel"><div id="india-map" role="application" aria-label="Interactive map showing service requests and listed workers"></div><div class="map-footnote">Map data © OpenStreetMap contributors. Your location is requested only after you tap the location button.</div></div>
         <aside class="map-sidebar">
-          <h3>Service legend</h3>
+          <h3>Map legend</h3><div class="legend-item"><span class="legend-symbol">📌</span><span>Service request</span></div><div class="legend-item"><span class="legend-symbol">👷</span><span>Listed worker (location not yet mapped)</span></div>
           <div class="legend-list" id="legend-list"></div>
           <label class="field-label" for="map-filter">Filter services</label>
           <select id="map-filter" class="community-control"><option value="all">All services</option><option value="plumbing">Plumbing</option><option value="electrical">Electrical work</option><option value="cleaning">Cleaning</option><option value="cooking">Cooking &amp; daily help</option><option value="carpentry">Carpentry</option><option value="painting">Painting</option></select>
-          <p class="sidebar-hint">Select a marker to view the service request details.</p>
+          <p class="sidebar-hint">📌 Request markers show work people need. 👷 indicates listed professionals are a separate data type; worker pins need provider coordinates.</p>
           <div id="map-status" class="community-status" role="status" aria-live="polite">Loading map…</div>
         </aside>
       </div>
@@ -69,17 +71,17 @@
         <div class="report-intro"><p class="eyebrow">Make it visible</p><h2>Request a local <em>service</em></h2><p class="body-copy">Describe the service you need and choose its approximate location on the map.</p><div class="privacy-note"><strong>Location privacy</strong><p>Do not report your exact home location. Use a nearby public landmark or a slightly approximate point. Your browser will ask permission before sharing device location.</p></div></div>
         <form class="community-form" id="community-report-form">
           <div class="form-heading"><h3>New service request</h3><span class="form-required">* Required</span></div>
-          <label class="field-label" for="report-title">Short title *</label><input class="community-control" id="report-title" name="title" maxlength="90" required placeholder="e.g. Large pothole near bus stop">
+          <label class="field-label" for="report-title">Short title *</label><input class="community-control" id="report-title" name="title" maxlength="90" required placeholder="e.g. Need a plumber for a leaking tap">
           <label class="field-label" for="report-category">Service type *</label><select class="community-control" id="report-category" name="category" required><option value="">Choose a service</option><option value="plumbing">Plumbing</option><option value="electrical">Electrical work</option><option value="cleaning">Cleaning</option><option value="cooking">Cooking &amp; daily help</option><option value="carpentry">Carpentry</option><option value="painting">Painting</option></select>
           <label class="field-label" for="report-description">What service do you need? *</label><textarea class="community-control" id="report-description" name="description" rows="4" maxlength="1200" required placeholder="Describe the work needed and nearby landmark. Avoid personal details."></textarea>
           <label class="field-label" for="report-location">Area / landmark *</label><input class="community-control" id="report-location" name="location" maxlength="160" required placeholder="e.g. Near central bus stop, Ahmedabad">
           <div class="coordinate-row"><div><label class="field-label" for="report-lat">Latitude *</label><input class="community-control" id="report-lat" name="latitude" type="number" step="any" min="6.5" max="37.5" required placeholder="Click map or locate"></div><div><label class="field-label" for="report-lng">Longitude *</label><input class="community-control" id="report-lng" name="longitude" type="number" step="any" min="68" max="98.5" required placeholder="Click map or locate"></div></div>
           <button class="button button-secondary location-form-button" id="form-locate" type="button">◎ Fill coordinates from my location</button>
-          <label class="field-label" for="report-photo">Photo (optional)</label><input class="community-control file-control" id="report-photo" name="photo" type="file" accept="image/*"><small class="form-help">Photo stays in this browser demo and is not uploaded to a server.</small>
+          <label class="field-label" for="report-photo">Photo (optional)</label><input class="community-control file-control" id="report-photo" name="photo" type="file" accept="image/*"><small class="form-help">Photo uploads with your request after the Supabase setup SQL has been run. Maximum size: 2 MB.</small>
           <label class="field-label" for="report-name">Name (optional)</label><input class="community-control" id="report-name" name="reporter" maxlength="70" placeholder="You can leave this blank">
           <button class="button button-primary report-submit" type="submit">Add service request to map <span aria-hidden="true">→</span></button>
           <p id="form-feedback" class="community-status" role="status" aria-live="polite"></p>
-          <p class="form-help">Prototype notice: reports currently save only in this browser's local storage. They are not sent to authorities or shared with other users yet.</p>
+          <p class="form-help">Requests are shared through Work Satthi after the Supabase setup SQL has been run. Avoid including private information in public requests.</p>
         </form>
       </div>
     </section>
@@ -90,6 +92,6 @@
       <p id="empty-reports" class="empty-reports">No service requests yet. Add the first request using the form above.</p>
     </section>
   </main>
-  <footer class="site-footer"><div class="wrap footer-main"><a class="brand" href="community.html"><img class="brand-logo" src="logo.svg" alt=""><span class="brand-text">Work <em>Satthi</em></span></a><p class="footer-tagline">Small reports. Clearer communities.</p><div class="footer-links"><a href="index.html">Original website</a><a href="#report-form">Report an issue</a></div></div><div class="wrap footer-bottom"><span>Work Satthi · Hackathon prototype</span><span>Not an official government reporting channel.</span></div></footer>
+  <footer class="site-footer"><div class="wrap footer-main"><a class="brand" href="community.html"><img class="brand-logo" src="logo.svg" alt=""><span class="brand-text">Work <em>Satthi</em></span></a><p class="footer-tagline">Local services. Stronger communities.</p><div class="footer-links"><a href="index.html">Original website</a><a href="#report-form">Report an issue</a></div></div><div class="wrap footer-bottom"><span>Work Satthi · Hackathon prototype</span><span>Not an official government reporting channel.</span></div></footer>
 </body>
 </html>
