@@ -2,15 +2,21 @@
   "use strict";
   const KEY = "communityWatchReportsV1";
   const categories = {
-    pothole: { label: "Road / pothole", symbol: "●", color: "#B45309" },
-    waste: { label: "Waste / garbage", symbol: "♻", color: "#15803D" },
-    water: { label: "Water / drainage", symbol: "◆", color: "#0369A1" },
-    streetlight: { label: "Streetlight", symbol: "☼", color: "#A16207" },
-    electricity: { label: "Electricity hazard", symbol: "⚡", color: "#B91C1C" },
-    air: { label: "Air pollution", symbol: "≋", color: "#6D28D9" },
-    public: { label: "Public property", symbol: "■", color: "#475569" },
-    other: { label: "Other issue", symbol: "!", color: "#BE185D" }
+    plumbing: { label: "Plumbing", symbol: "🔧", color: "#315B43" },
+    electrical: { label: "Electrical work", symbol: "⚡", color: "#A16207" },
+    cleaning: { label: "Cleaning", symbol: "🧹", color: "#036B66" },
+    cooking: { label: "Cooking & daily help", symbol: "🍳", color: "#B45335" },
+    carpentry: { label: "Carpentry", symbol: "🪚", color: "#475569" },
+    painting: { label: "Painting", symbol: "🎨", color: "#6D28D9" }
   };
+  const legacyCategoryMap = {
+    pothole: "carpentry", waste: "cleaning", water: "plumbing",
+    streetlight: "electrical", electricity: "electrical", air: "cleaning",
+    public: "carpentry", other: "cleaning"
+  };
+  function normalizeCategory(category) {
+    return categories[category] ? category : (legacyCategoryMap[category] || "cleaning");
+  }
   const $ = (id) => document.getElementById(id);
   let map;
   let markers = [];
@@ -23,7 +29,7 @@
   }
   function saveReports(reports) { localStorage.setItem(KEY, JSON.stringify(reports)); }
   function icon(category) {
-    const item = categories[category] || categories.other;
+    const item = categories[normalizeCategory(category)];
     return L.divIcon({ className: "issue-marker-shell", html: '<span class="issue-marker" style="--marker-color:' + item.color + '">' + item.symbol + '</span>', iconSize: [34, 34], iconAnchor: [17, 17], popupAnchor: [0, -15] });
   }
   function initMap() {
@@ -32,7 +38,7 @@
     L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", { maxZoom: 19, attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors' }).addTo(map);
     map.setMaxBounds([[5.5, 66.5], [38.8, 100]]);
     map.on("click", (event) => setCoordinates(event.latlng.lat, event.latlng.lng, true));
-    $("map-status").textContent = "Tap the map to choose a report location.";
+    $("map-status").textContent = "Tap the map to choose the service location.";
     renderLegend();
     renderReports();
   }
@@ -65,7 +71,7 @@
   }
   function filteredReports() {
     const filter = $("reports-filter").value;
-    return loadReports().filter((report) => filter === "all" || report.category === filter);
+    return loadReports().filter((report) => filter === "all" || normalizeCategory(report.category) === filter);
   }
   function renderReports() {
     if (!map) return;
@@ -73,9 +79,9 @@
     markers = [];
     const reports = loadReports();
     const mapFilter = $("map-filter").value;
-    reports.filter((report) => mapFilter === "all" || report.category === mapFilter).forEach((report) => {
+    reports.filter((report) => mapFilter === "all" || normalizeCategory(report.category) === mapFilter).forEach((report) => {
       if (!Number.isFinite(Number(report.lat)) || !Number.isFinite(Number(report.lng))) return;
-      const item = categories[report.category] || categories.other;
+      const item = categories[normalizeCategory(report.category)];
       const marker = L.marker([Number(report.lat), Number(report.lng)], { icon: icon(report.category) }).addTo(map);
       marker.bindPopup('<div class="map-popup"><strong>' + safe(report.title) + '</strong><span class="popup-category">' + safe(item.label) + '</span><p>' + safe(report.description) + '</p><small>' + safe(report.location) + '</small><br><small>' + safe(new Date(report.createdAt).toLocaleString()) + '</small></div>');
       markers.push(marker);
@@ -83,7 +89,7 @@
     $("report-total").textContent = reports.length;
     const list = filteredReports();
     $("reports-list").innerHTML = list.map((report) => {
-      const item = categories[report.category] || categories.other;
+      const item = categories[normalizeCategory(report.category)];
       return '<article class="report-card"><div class="report-card-top"><span class="legend-symbol" style="--marker-color:' + item.color + '">' + item.symbol + '</span><span class="report-category">' + safe(item.label) + '</span><span class="report-status">Community report</span></div><h3>' + safe(report.title) + '</h3><p>' + safe(report.description) + '</p><div class="report-location">⌖ ' + safe(report.location) + '</div><div class="report-card-bottom"><span>' + safe(new Date(report.createdAt).toLocaleDateString()) + (report.reporter ? ' · ' + safe(report.reporter) : '') + '</span><button type="button" class="text-button" data-report-id="' + safe(report.id) + '">View on map →</button></div></article>';
     }).join("");
     $("empty-reports").hidden = list.length > 0;
@@ -91,20 +97,20 @@
       const report = loadReports().find((item) => item.id === button.dataset.reportId);
       if (report && map) { map.setView([report.lat, report.lng], 13); const marker = markers.find((item) => { const point = item.getLatLng(); return Math.abs(point.lat - report.lat) < 0.000001 && Math.abs(point.lng - report.lng) < 0.000001; }); if (marker) marker.openPopup(); $("explore-map").scrollIntoView({ behavior: "smooth" }); }
     }));
-    $("map-status").textContent = markers.length + " report marker" + (markers.length === 1 ? "" : "s") + " shown. Tap any marker for details.";
+    $("map-status").textContent = markers.length + " service marker" + (markers.length === 1 ? "" : "s") + " shown. Tap any marker for details.";
   }
   $("community-report-form").addEventListener("submit", (event) => {
     event.preventDefault();
     const lat = Number($("report-lat").value), lng = Number($("report-lng").value);
     if (!Number.isFinite(lat) || !Number.isFinite(lng) || lat < 6.5 || lat > 37.5 || lng < 68 || lng > 98.5) { $("form-feedback").textContent = "Choose a valid location in India by clicking the map or using location."; return; }
     const reports = loadReports();
-    const report = { id: (window.crypto && crypto.randomUUID) ? crypto.randomUUID() : String(Date.now()), title: $("report-title").value.trim(), category: $("report-category").value, description: $("report-description").value.trim(), location: $("report-location").value.trim(), lat, lng, reporter: $("report-name").value.trim(), createdAt: new Date().toISOString() };
+    const report = { id: (window.crypto && crypto.randomUUID) ? crypto.randomUUID() : String(Date.now()), title: $("report-title").value.trim(), category: normalizeCategory($("report-category").value), description: $("report-description").value.trim(), location: $("report-location").value.trim(), lat, lng, reporter: $("report-name").value.trim(), createdAt: new Date().toISOString() };
     if (!report.title || !report.category || !report.description || !report.location) { $("form-feedback").textContent = "Please complete all required fields."; return; }
     reports.unshift(report);
     try { saveReports(reports.slice(0, 300)); }
     catch { $("form-feedback").textContent = "Could not save the report in this browser. Try removing the optional photo and retry."; return; }
     $("community-report-form").reset(); selectedPoint = null; photoData = "";
-    $("form-feedback").textContent = "Report added to this browser's map. It is not shared with other devices or sent to authorities.";
+    $("form-feedback").textContent = "Service request added to this browser's map. It is not shared with other devices yet.";
     renderReports();
     map.setView([lat, lng], 12);
     const marker = markers.find((item) => { const point = item.getLatLng(); return Math.abs(point.lat - lat) < 0.000001 && Math.abs(point.lng - lng) < 0.000001; });
