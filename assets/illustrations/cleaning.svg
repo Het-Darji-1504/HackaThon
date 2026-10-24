@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 150" role="img" aria-label="Home cleaning illustration">
+  <rect width="200" height="150" fill="#E1F0ED"/>
+  <!-- Floor -->
+  <rect x="0" y="120" width="200" height="30" fill="#C5DED9"/>
+  <!-- Mop stick -->
+  <line x1="110" y1="20" x2="70" y2="130" stroke="#8AAF68" stroke-width="5" stroke-linecap="round"/>
+  <!-- Mop head -->
+  <ellipse cx="66" cy="132" rx="22" ry="9" fill="#5E9E8A" opacity="0.85"/>
+  <line x1="48" y1="128" x2="84" y2="136" stroke="#FFFFFF" stroke-width="1.5" stroke-linecap="round" opacity="0.6"/>
+  <line x1="52" y1="133" x2="80" y2="132" stroke="#FFFFFF" stroke-width="1.5" stroke-linecap="round" opacity="0.5"/>
+  <!-- Bucket -->
+  <path d="M130 90 L142 130 L166 130 L178 90 Z" fill="#FFFFFF" stroke="#9DC8C0" stroke-width="2"/>
+  <ellipse cx="154" cy="90" rx="24" ry="8" fill="#C5DED9" stroke="#9DC8C0" stroke-width="2"/>
+  <!-- Bubbles in bucket -->
+  <circle cx="148" cy="100" r="4" fill="#A0D0C8" opacity="0.7"/>
+  <circle cx="160" cy="96" r="3" fill="#A0D0C8" opacity="0.6"/>
+  <circle cx="155" cy="110" r="5" fill="#A0D0C8" opacity="0.5"/>
+  <!-- Bucket handle -->
+  <path d="M136 90 Q154 76 172 90" fill="none" stroke="#9DC8C0" stroke-width="2.5" stroke-linecap="round"/>
+  <!-- Cleaning sparkles -->
+  <g fill="#5E9E8A" opacity="0.7">
+    <circle cx="30" cy="50" r="3"/>
+    <circle cx="38" cy="40" r="2"/>
+    <circle cx="24" cy="42" r="2"/>
+  </g>
+  <g fill="#5E9E8A" opacity="0.55">
+    <circle cx="170" cy="55" r="3"/>
+    <circle cx="178" cy="46" r="2"/>
+    <circle cx="163" cy="48" r="2"/>
+  </g>
+</svg>

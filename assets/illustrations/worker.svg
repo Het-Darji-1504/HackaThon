@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 340" role="img" aria-label="Worker with tools illustration">
+  <!-- Background circle -->
+  <circle cx="140" cy="170" r="130" fill="#C4DDB5" opacity="0.4"/>
+
+  <!-- Worker body -->
+  <!-- Head -->
+  <circle cx="140" cy="90" r="38" fill="#F0C89A"/>
+  <!-- Hair -->
+  <ellipse cx="140" cy="64" rx="36" ry="18" fill="#5C4030"/>
+  <rect x="104" y="64" width="72" height="18" fill="#5C4030"/>
+
+  <!-- Eyes -->
+  <circle cx="128" cy="90" r="4" fill="#2C1A10"/>
+  <circle cx="152" cy="90" r="4" fill="#2C1A10"/>
+  <!-- Smile -->
+  <path d="M130 103 Q140 112 150 103" fill="none" stroke="#C0885A" stroke-width="2" stroke-linecap="round"/>
+
+  <!-- Body / shirt -->
+  <path d="M90 135 Q90 128 140 128 Q190 128 190 135 L200 240 H80 Z" fill="#8AAF68"/>
+  <!-- Collar -->
+  <path d="M125 128 L140 150 L155 128" fill="#FFFFFF" opacity="0.6"/>
+  <!-- Arms -->
+  <path d="M90 140 Q60 160 52 200" stroke="#8AAF68" stroke-width="32" stroke-linecap="round" fill="none"/>
+  <path d="M190 140 Q220 160 228 200" stroke="#8AAF68" stroke-width="32" stroke-linecap="round" fill="none"/>
+  <!-- Hands -->
+  <circle cx="52" cy="202" r="18" fill="#F0C89A"/>
+  <circle cx="228" cy="202" r="18" fill="#F0C89A"/>
+
+  <!-- Pants -->
+  <rect x="86" y="238" width="54" height="90" rx="10" fill="#3D5244"/>
+  <rect x="140" y="238" width="54" height="90" rx="10" fill="#3D5244"/>
+
+  <!-- Toolbox in right hand -->
+  <rect x="212" y="195" width="42" height="30" rx="7" fill="#E8AA50"/>
+  <rect x="222" y="188" width="22" height="10" rx="4" fill="#C88830"/>
+  <line x1="212" y1="210" x2="254" y2="210" stroke="#C88830" stroke-width="1.5"/>
+
+  <!-- Wrench in left hand -->
+  <g transform="translate(30,188) rotate(30)">
+    <rect x="-4" y="-24" width="9" height="44" rx="4" fill="#7B9C60"/>
+    <rect x="-9" y="-28" width="18" height="11" rx="5" fill="#7B9C60"/>
+    <rect x="-9" y="16" width="18" height="8" rx="4" fill="#7B9C60"/>
+  </g>
+
+  <!-- Hard hat -->
+  <path d="M102 68 Q140 46 178 68 L178 76 Q140 58 102 76 Z" fill="#F5C840"/>
+  <rect x="98" y="72" width="84" height="14" rx="7" fill="#F5C840"/>
+  <!-- Hat brim shadow -->
+  <rect x="96" y="82" width="88" height="5" rx="2.5" fill="#E0B020" opacity="0.5"/>
+</svg>

@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 150" role="img" aria-label="Cooking and daily help illustration">
+  <rect width="200" height="150" fill="#F8E6DC"/>
+  <!-- Stovetop surface -->
+  <rect x="28" y="80" width="144" height="55" rx="12" fill="#FFFFFF" stroke="#E8CBBC" stroke-width="2"/>
+  <!-- Burner circles -->
+  <circle cx="78" cy="108" r="20" fill="#F4D0BE" stroke="#E0B8A0" stroke-width="2"/>
+  <circle cx="78" cy="108" r="12" fill="#F8E6DC" stroke="#E0B8A0" stroke-width="1.5"/>
+  <circle cx="78" cy="108" r="5" fill="#E0B8A0"/>
+  <circle cx="136" cy="108" r="14" fill="#F4D0BE" stroke="#E0B8A0" stroke-width="2"/>
+  <circle cx="136" cy="108" r="8" fill="#F8E6DC" stroke="#E0B8A0" stroke-width="1.5"/>
+  <circle cx="136" cy="108" r="4" fill="#E0B8A0"/>
+  <!-- Pot on left burner -->
+  <ellipse cx="78" cy="72" rx="28" ry="10" fill="#8AAF68"/>
+  <rect x="50" y="62" width="56" height="20" rx="4" fill="#8AAF68"/>
+  <ellipse cx="78" cy="62" rx="28" ry="8" fill="#A0C880"/>
+  <!-- Steam from pot -->
+  <path d="M68 54 Q66 46 70 40" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" opacity="0.7"/>
+  <path d="M78 52 Q76 44 80 36" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" opacity="0.6"/>
+  <path d="M88 54 Q86 46 90 40" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" opacity="0.7"/>
+  <!-- Pot handle -->
+  <rect x="24" y="66" width="28" height="8" rx="4" fill="#6E9252"/>
+  <rect x="104" y="66" width="24" height="8" rx="4" fill="#6E9252"/>
+  <!-- Lid knob -->
+  <circle cx="78" cy="62" r="5" fill="#6E9252"/>
+  <!-- Spoon -->
+  <path d="M148 30 Q155 50 150 80" fill="none" stroke="#8AAF68" stroke-width="3" stroke-linecap="round"/>
+  <ellipse cx="148" cy="28" rx="7" ry="9" fill="#8AAF68"/>
+</svg>

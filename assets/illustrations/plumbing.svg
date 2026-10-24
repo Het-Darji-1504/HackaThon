@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 150" role="img" aria-label="Plumbing illustration">
+  <!-- Background tiles -->
+  <rect width="200" height="150" fill="#E8EDDA"/>
+  <!-- Pipe horizontal -->
+  <rect x="20" y="68" width="160" height="14" rx="7" fill="#7B9C60" opacity="0.35"/>
+  <!-- Pipe vertical drop -->
+  <rect x="88" y="68" width="14" height="55" rx="7" fill="#7B9C60" opacity="0.35"/>
+  <!-- Sink basin -->
+  <rect x="40" y="44" width="120" height="60" rx="12" fill="#FFFFFF" stroke="#C5D4B0" stroke-width="2"/>
+  <!-- Faucet body -->
+  <rect x="85" y="28" width="30" height="22" rx="8" fill="#8AAF68"/>
+  <rect x="94" y="44" width="12" height="12" rx="4" fill="#6E9252"/>
+  <!-- Water drop -->
+  <ellipse cx="100" cy="60" rx="5" ry="7" fill="#A4C9E3" opacity="0.85"/>
+  <!-- Handle left -->
+  <rect x="62" y="30" width="22" height="8" rx="4" fill="#8AAF68"/>
+  <!-- Handle right -->
+  <rect x="116" y="30" width="22" height="8" rx="4" fill="#8AAF68"/>
+  <!-- Drain -->
+  <circle cx="100" cy="94" r="7" fill="#C5D4B0"/>
+  <circle cx="100" cy="94" r="4" fill="#E8EDDA"/>
+  <!-- Wrench tool -->
+  <g transform="translate(148,90) rotate(-35)">
+    <rect x="-4" y="-22" width="8" height="38" rx="3" fill="#6E9252"/>
+    <rect x="-8" y="-26" width="16" height="10" rx="4" fill="#6E9252"/>
+    <rect x="-8" y="12" width="16" height="8" rx="3" fill="#6E9252"/>
+  </g>
+</svg>
