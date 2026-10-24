@@ -124,33 +124,108 @@
     });
   }
 
+  const ISSUE_TYPES = {
+    road_damage: { icon: '🕳️', label: 'Road damage / pothole', advice: 'Avoid the damaged area if safe and report it to the local municipal road department.' },
+    garbage: { icon: '🗑️', label: 'Garbage / illegal dumping', advice: 'Report it to the municipal sanitation or solid-waste team.' },
+    water_leak: { icon: '💧', label: 'Water leakage / pipe burst', advice: 'Report the leak to the local water-supply authority; keep clear of fast-flowing water.' },
+    streetlight: { icon: '💡', label: 'Broken streetlight', advice: 'Report the pole/location to the municipal street-lighting team.' },
+    electrical_hazard: { icon: '⚡', label: 'Electrical hazard', advice: 'Keep away; do not touch exposed wires. Contact the electricity provider or emergency services immediately if danger is present.' },
+    drainage: { icon: '🚰', label: 'Blocked drain / flooding', advice: 'Report it to the municipal drainage team and avoid floodwater where possible.' },
+    other: { icon: '📍', label: 'Other civic issue', advice: 'Send the location and details to the relevant local civic authority.' }
+  };
+  let issueMap = null;
+  let issueMarkers = null;
+  function escapeHtml(value) {
+    return String(value == null ? '' : value).replace(/[&<>"']/g, (ch) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[ch]));
+  }
+  function issueIcon(type) {
+    const item = ISSUE_TYPES[type] || ISSUE_TYPES.other;
+    return window.L.divIcon({ className: 'issue-marker-wrap', html: '<span class="issue-marker" aria-label="' + escapeHtml(item.label) + '">' + item.icon + '</span>', iconSize: [38, 38], iconAnchor: [19, 19], popupAnchor: [0, -18] });
+  }
+  function issuePopup(issue) {
+    const item = ISSUE_TYPES[issue.issue_type] || ISSUE_TYPES.other;
+    const status = String(issue.status || 'reported').replace(/_/g, ' ');
+    return '<div class="issue-map-popup"><strong>' + item.icon + ' ' + escapeHtml(issue.title) + '</strong><p>' + escapeHtml(item.label) + ' · ' + escapeHtml(issue.priority || 'normal') + ' priority</p><p>' + escapeHtml(issue.location_text) + '</p><p>Status: ' + escapeHtml(status) + '</p><p>' + escapeHtml(issue.description) + '</p><small>Suggested next step: ' + escapeHtml(item.advice) + '</small></div>';
+  }
+  async function loadIssueMarkers() {
+    if (!client || !issueMap || !issueMarkers) return;
+    const message = $('india-map-message');
+    try {
+      const rows = failIfError(await client.from('issue_reports').select('id,issue_type,title,description,location_text,latitude,longitude,priority,status,created_at').order('created_at', { ascending: false }).limit(500));
+      issueMarkers.clearLayers();
+      (rows || []).forEach((issue) => {
+        if (!Number.isFinite(Number(issue.latitude)) || !Number.isFinite(Number(issue.longitude))) return;
+        window.L.marker([Number(issue.latitude), Number(issue.longitude)], { icon: issueIcon(issue.issue_type) })
+          .bindPopup(issuePopup(issue), { maxWidth: 300 }).addTo(issueMarkers);
+      });
+      if (message) message.textContent = (rows || []).length + ' community report(s) loaded from Supabase. Select a symbol to see details and suggested next steps.';
+    } catch (error) {
+      if (message) message.textContent = 'Map is visible, but reports could not load from Supabase: ' + (error.message || 'Check the issue_reports table and its RLS policies.');
+    }
+  }
+  async function geocodeLocation(place) {
+    const response = await fetch('https://nominatim.openstreetmap.org/search?format=jsonv2&limit=1&countrycodes=in&q=' + encodeURIComponent(place));
+    if (!response.ok) throw new Error('Location lookup is unavailable. Please try again.');
+    const results = await response.json();
+    if (!results.length) throw new Error('Location not found. Add the locality, city, and state.');
+    return results[0];
+  }
   function initIndiaMap() {
     const mapEl = $('india-map'), form = $('india-map-search'), message = $('india-map-message');
     if (!mapEl || !form) return;
     if (!window.L) { if (message) message.textContent = 'Map library unavailable. Check your connection and refresh.'; return; }
-    const map = window.L.map(mapEl, { scrollWheelZoom: false }).setView([22.9734, 78.6569], 4);
-    window.L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 18, attribution: '&copy; OpenStreetMap contributors' }).addTo(map);
-    let marker = null;
+    issueMap = window.L.map(mapEl, { scrollWheelZoom: false }).setView([22.9734, 78.6569], 4);
+    window.L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 18, attribution: '&copy; OpenStreetMap contributors' }).addTo(issueMap);
+    issueMarkers = window.L.layerGroup().addTo(issueMap);
     form.addEventListener('submit', async function (event) {
       event.preventDefault();
       const place = String($('india-map-location').value || '').trim();
       if (!place) { if (message) message.textContent = 'Enter a city or locality.'; return; }
       if (message) message.textContent = 'Searching map…';
       try {
-        const response = await fetch('https://nominatim.openstreetmap.org/search?format=jsonv2&limit=1&q=' + encodeURIComponent(place));
-        if (!response.ok) throw new Error('Map search is temporarily unavailable.');
-        const results = await response.json();
-        if (!results.length) { if (message) message.textContent = 'Location not found. Try a city name and state.'; return; }
-        const found = results[0]; map.setView([Number(found.lat), Number(found.lon)], 12);
-        if (marker) marker.remove();
-        marker = window.L.marker([Number(found.lat), Number(found.lon)]).addTo(map).bindPopup(found.display_name).openPopup();
-        if (message) message.textContent = 'Showing ' + found.display_name + '. Worker pins require saved worker coordinates.';
+        const found = await geocodeLocation(place);
+        issueMap.setView([Number(found.lat), Number(found.lon)], 12);
+        if (message) message.textContent = 'Showing ' + found.display_name + '. Loading community reports…';
       } catch (error) { if (message) message.textContent = error.message || 'Map search failed.'; }
     });
     if ('IntersectionObserver' in window) {
-      const observer = new IntersectionObserver(function (entries) { if (entries.some(function (entry) { return entry.isIntersecting; })) map.invalidateSize(); });
+      const observer = new IntersectionObserver(function (entries) { if (entries.some(function (entry) { return entry.isIntersecting; })) issueMap.invalidateSize(); });
       observer.observe(mapEl);
     }
+    loadIssueMarkers();
+  }
+  function initIssueReportForm() {
+    const form = $('report-issue-form');
+    if (!form) return;
+    form.addEventListener('submit', async function (event) {
+      event.preventDefault();
+      const message = $('issue-report-message');
+      const submit = form.querySelector('button[type="submit"]');
+      const fd = new FormData(form);
+      const type = String(fd.get('issueType') || '');
+      const title = String(fd.get('title') || '').trim();
+      const location = String(fd.get('location') || '').trim();
+      const description = String(fd.get('description') || '').trim();
+      const priority = String(fd.get('priority') || 'normal');
+      if (!ISSUE_TYPES[type] || !title || !location || !description) { setMessage('issue-report-message', 'Complete all required fields before submitting.', true); return; }
+      if (submit) submit.disabled = true;
+      setMessage('issue-report-message', 'Finding the location and saving your report…');
+      try {
+        const found = await geocodeLocation(location);
+        failIfError(await client.from('issue_reports').insert({
+          reporter_id: currentUser.id, issue_type: type, title, description, location_text: location,
+          latitude: Number(found.lat), longitude: Number(found.lon), priority, status: 'reported'
+        }));
+        setMessage('issue-report-message', 'Issue saved to Supabase and added to the map.');
+        form.reset();
+        if (issueMap) {
+          issueMap.setView([Number(found.lat), Number(found.lon)], 14);
+          await loadIssueMarkers();
+        }
+      } catch (error) {
+        setMessage('issue-report-message', (error.message || 'Could not save report.') + ' If the issue_reports table is not set up yet, run the SQL file in the repository in Supabase SQL Editor.', true);
+      } finally { if (submit) submit.disabled = false; }
+    });
   }
 
     const profileForm = $('profile-form');
@@ -244,6 +319,7 @@
       if (!data.session) { window.location.href = 'login.html'; return; }
       currentUser = data.session.user;
       initIndiaMap();
+      initIssueReportForm();
       await loadServices();
       await loadProfile(currentUser);
       if (profile.role === 'customer') await loadBookings();
