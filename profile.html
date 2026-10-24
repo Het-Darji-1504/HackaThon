@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#143D32">
+  <meta name="description" content="Your Work Satthi account — choose how you want to use the platform.">
+  <title>Profile — Work Satthi</title>
+  <link rel="icon" href="logo.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="site-header">
+    <nav class="nav wrap" aria-label="Site navigation">
+      <a class="brand" href="index.html" aria-label="Work Satthi home">
+        <img class="brand-logo" src="logo.svg" alt="">
+        <span class="brand-text">Work <em>Satthi</em></span>
+      </a>
+      <a class="nav-cta" href="index.html">
+        <span>← Back to home</span>
+      </a>
+    </nav>
+  </header>
+
+  <!-- MAIN -->
+  <main class="profile-main">
+    <section class="profile-card" aria-labelledby="profile-heading">
+
+      <div class="profile-symbol" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="8" r="4"/>
+          <path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/>
+        </svg>
+      </div>
+
+      <p class="eyebrow">Welcome to Work Satthi</p>
+      <h1 id="profile-heading">Your next local connection <em>starts here.</em></h1>
+      <p class="profile-intro">
+        Choose how you plan to use Work Satthi to get started.
+        You'll be taken to the right account flow.
+      </p>
+
+      <div class="profile-options" role="list">
+
+        <a class="profile-choice" href="login.html?role=customer" role="listitem">
+          <div class="profile-choice-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+              <polyline points="9 22 9 12 15 12 15 22"/>
+            </svg>
+          </div>
+          <div class="profile-choice-text">
+            <b>I need a service</b>
+            <small>Find help for home and everyday tasks</small>
+          </div>
+          <span class="profile-choice-arrow" aria-hidden="true">→</span>
+        </a>
+
+        <a class="profile-choice" href="login.html?mode=signup&amp;role=worker" role="listitem">
+          <div class="profile-choice-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-4 0v2M8 7V5a2 2 0 0 0-4 0v2"/>
+            </svg>
+          </div>
+          <div class="profile-choice-text">
+            <b>I offer a service</b>
+            <small>Help local customers discover your skills</small>
+          </div>
+          <span class="profile-choice-arrow" aria-hidden="true">→</span>
+        </a>
+
+      </div>
+
+      <div class="profile-message" role="note">
+        Profile management and booking history require a logged-in account.
+        This page is a gateway — actual authentication is handled through the login page.
+      </div>
+
+      <p class="profile-footer-text">
+        Already have an account? <a href="login.html">Log in here</a>.
+      </p>
+
+      <a class="profile-back" href="index.html">← Explore Work Satthi instead</a>
+    </section>
+  </main>
+
+  <footer class="profile-page-footer" role="contentinfo">
+    © 2026 Work Satthi · Local skills. Trusted hands.
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#143D32">
+  <meta name="description" content="Report civic issues, explore community reports, and view problem locations across India.">
+  <title>Community Watch India — Report. Map. Improve.</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
+  <script defer src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+  <script defer src="community.js"></script>
+</head>
+<body class="community-page">
+  <header class="site-header">
+    <nav class="nav wrap" aria-label="Main navigation">
+      <a class="brand" href="index.html"><img class="brand-logo" src="logo.svg" alt=""><span class="brand-text">Community <em>Watch</em></span></a>
+      <button class="menu-toggle" id="menu-toggle" aria-label="Open navigation menu" aria-expanded="false" aria-controls="nav-links"><span class="menu-toggle-icon" aria-hidden="true"><span></span><span></span><span></span></span></button>
+      <div class="nav-links" id="nav-links">
+        <a href="index.html">Home</a><a href="community.html" aria-current="page">Explore map</a><a href="#report-form">Report an issue</a><a href="#community-reports">Community reports</a>
+      </div>
+      <a class="nav-cta" href="#report-form"><span>＋ Report</span></a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="community-hero">
+      <div class="wrap community-hero-inner">
+        <div>
+          <p class="eyebrow"><span class="eyebrow-dot"></span> Community-powered civic reporting</p>
+          <h1>See a problem?<br><em>Put it on the map.</em></h1>
+          <p class="community-lead">Report potholes, waste, water leaks, broken streetlights and other local issues. Explore reports from communities across India and help make problems visible.</p>
+          <div class="hero-actions"><a class="button button-primary" href="#report-form">Report an issue <span aria-hidden="true">→</span></a><a class="button button-secondary" href="#explore-map">Explore the map</a></div>
+          <p class="community-note">Community reports are not official emergency services. For urgent danger, contact local authorities.</p>
+        </div>
+        <div class="community-stat-card">
+          <span class="stat-label">Community dashboard</span>
+          <strong id="report-total">0</strong><span>reports visible on this device</span>
+          <div class="stat-divider"></div>
+          <strong id="category-total">8</strong><span>issue categories</span>
+          <p>Reports will be shared across devices only after a backend API is deployed and configured.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="community-section wrap" id="explore-map">
+      <div class="community-section-heading">
+        <div><p class="eyebrow">Explore India</p><h2>Issues near <em>you</em></h2><p class="body-copy">Use the map to explore reported problems. Each issue type has its own symbol.</p></div>
+        <button class="button button-secondary" id="locate-me" type="button">◎ Use my location</button>
+      </div>
+      <div class="map-layout">
+        <div class="map-panel"><div id="india-map" role="application" aria-label="Interactive map of India showing community issue reports"></div><div class="map-footnote">Map data © OpenStreetMap contributors. Your location is requested only after you tap the location button.</div></div>
+        <aside class="map-sidebar">
+          <h3>Issue legend</h3>
+          <div class="legend-list" id="legend-list"></div>
+          <label class="field-label" for="map-filter">Filter map</label>
+          <select id="map-filter" class="community-control"><option value="all">All issue types</option><option value="pothole">Road / pothole</option><option value="waste">Waste / garbage</option><option value="water">Water leak / drainage</option><option value="streetlight">Streetlight</option><option value="electricity">Electricity hazard</option><option value="air">Air pollution</option><option value="public">Public property</option><option value="other">Other issue</option></select>
+          <p class="sidebar-hint">Select a marker to read the report details. Map markers are approximate and should not be treated as a safety guarantee.</p>
+          <div id="map-status" class="community-status" role="status" aria-live="polite">Loading map…</div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="community-section community-form-section" id="report-form">
+      <div class="wrap report-grid">
+        <div class="report-intro"><p class="eyebrow">Make it visible</p><h2>Report a local <em>problem</em></h2><p class="body-copy">Add a short description and place the report on the map. You can use your current location or choose a point by clicking the map.</p><div class="privacy-note"><strong>Location privacy</strong><p>Do not report your exact home location. Use a nearby public landmark or a slightly approximate point. Your browser will ask permission before sharing device location.</p></div></div>
+        <form class="community-form" id="community-report-form">
+          <div class="form-heading"><h3>New community report</h3><span class="form-required">* Required</span></div>
+          <label class="field-label" for="report-title">Short title *</label><input class="community-control" id="report-title" name="title" maxlength="90" required placeholder="e.g. Large pothole near bus stop">
+          <label class="field-label" for="report-category">Problem type *</label><select class="community-control" id="report-category" name="category" required><option value="">Choose a category</option><option value="pothole">Road / pothole</option><option value="waste">Waste / garbage</option><option value="water">Water leak / drainage</option><option value="streetlight">Broken streetlight</option><option value="electricity">Electricity hazard</option><option value="air">Air pollution</option><option value="public">Damaged public property</option><option value="other">Other issue</option></select>
+          <label class="field-label" for="report-description">What did you notice? *</label><textarea class="community-control" id="report-description" name="description" rows="4" maxlength="1200" required placeholder="Describe the issue and nearby public landmark. Avoid personal details."></textarea>
+          <label class="field-label" for="report-location">Area / landmark *</label><input class="community-control" id="report-location" name="location" maxlength="160" required placeholder="e.g. Near central bus stop, Ahmedabad">
+          <div class="coordinate-row"><div><label class="field-label" for="report-lat">Latitude *</label><input class="community-control" id="report-lat" name="latitude" type="number" step="any" min="6.5" max="37.5" required placeholder="Click map or locate"></div><div><label class="field-label" for="report-lng">Longitude *</label><input class="community-control" id="report-lng" name="longitude" type="number" step="any" min="68" max="98.5" required placeholder="Click map or locate"></div></div>
+          <button class="button button-secondary location-form-button" id="form-locate" type="button">◎ Fill coordinates from my location</button>
+          <label class="field-label" for="report-photo">Photo (optional)</label><input class="community-control file-control" id="report-photo" name="photo" type="file" accept="image/*"><small class="form-help">Photo stays in this browser demo and is not uploaded to a server.</small>
+          <label class="field-label" for="report-name">Name (optional)</label><input class="community-control" id="report-name" name="reporter" maxlength="70" placeholder="You can leave this blank">
+          <button class="button button-primary report-submit" type="submit">Add report to map <span aria-hidden="true">→</span></button>
+          <p id="form-feedback" class="community-status" role="status" aria-live="polite"></p>
+          <p class="form-help">Prototype notice: reports currently save only in this browser's local storage. They are not sent to authorities or shared with other users yet.</p>
+        </form>
+      </div>
+    </section>
+
+    <section class="community-section wrap" id="community-reports">
+      <div class="community-section-heading"><div><p class="eyebrow">From the community</p><h2>Recent <em>reports</em></h2><p class="body-copy">Browse reports saved in this browser. Use the category filter to narrow the list.</p></div><label class="reports-filter-label" for="reports-filter">Show <select id="reports-filter" class="community-control"><option value="all">All categories</option><option value="pothole">Road / pothole</option><option value="waste">Waste / garbage</option><option value="water">Water leak / drainage</option><option value="streetlight">Streetlight</option><option value="electricity">Electricity hazard</option><option value="air">Air pollution</option><option value="public">Public property</option><option value="other">Other issue</option></select></label></div>
+      <div id="reports-list" class="reports-grid"></div>
+      <p id="empty-reports" class="empty-reports">No reports yet. Add the first community report using the form above.</p>
+    </section>
+  </main>
+  <footer class="site-footer"><div class="wrap footer-main"><a class="brand" href="community.html"><img class="brand-logo" src="logo.svg" alt=""><span class="brand-text">Community <em>Watch</em></span></a><p class="footer-tagline">Small reports. Clearer communities.</p><div class="footer-links"><a href="index.html">Original website</a><a href="#report-form">Report an issue</a></div></div><div class="wrap footer-bottom"><span>Community Watch India · Hackathon prototype</span><span>Not an official government reporting channel.</span></div></footer>
+</body>
+</html>

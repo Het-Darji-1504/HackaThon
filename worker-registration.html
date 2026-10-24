@@ -1,0 +1,246 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#143D32">
+  <meta name="description" content="Register as a service professional on Work Satthi. Share your skills and connect with nearby customers.">
+  <title>Join as a Worker — Work Satthi</title>
+  <link rel="icon" href="logo.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="site-header">
+    <nav class="nav wrap" aria-label="Site navigation">
+      <a class="brand" href="index.html" aria-label="Work Satthi home">
+        <img class="brand-logo" src="logo.svg" alt="">
+        <span class="brand-text">Work <em>Satthi</em></span>
+      </a>
+      <a class="nav-cta" href="index.html">
+        <span>← Back to home</span>
+      </a>
+    </nav>
+  </header>
+
+  <!-- MAIN -->
+  <main class="reg-page">
+    <div class="reg-card">
+
+      <header class="reg-header">
+        <p class="eyebrow">For service professionals</p>
+        <h1>Join Work Satthi as a worker</h1>
+        <p>
+          Tell us about your skills and where you work.
+          Your profile will help local customers find and connect with you.
+        </p>
+      </header>
+
+      <div class="reg-form">
+        <form id="reg-form" novalidate>
+          <div class="reg-form-grid">
+
+            <!-- Section: Personal info -->
+            <p class="reg-section-title">Personal information</p>
+
+            <div class="reg-field">
+              <label for="reg-name">Full name <span aria-label="required">*</span></label>
+              <input
+                id="reg-name"
+                name="name"
+                type="text"
+                autocomplete="name"
+                placeholder="Your full name"
+                required
+                maxlength="80"
+              >
+            </div>
+
+            <div class="reg-field">
+              <label for="reg-email">Email address <span aria-label="required">*</span></label>
+              <input
+                id="reg-email"
+                name="email"
+                type="email"
+                autocomplete="email"
+                placeholder="you@example.com"
+                required
+                maxlength="160"
+              >
+            </div>
+
+            <div class="reg-field">
+              <label for="reg-phone">Phone number <span aria-label="required">*</span></label>
+              <input
+                id="reg-phone"
+                name="phone"
+                type="tel"
+                autocomplete="tel"
+                placeholder="+91 98765 43210"
+                required
+                maxlength="20"
+              >
+            </div>
+
+            <div class="reg-field">
+              <label for="reg-area">Service area / locality <span aria-label="required">*</span></label>
+              <input
+                id="reg-area"
+                name="area"
+                type="text"
+                placeholder="e.g. Ahmedabad, Navrangpura"
+                required
+                maxlength="160"
+              >
+            </div>
+
+            <!-- Section: Professional info -->
+            <p class="reg-section-title">Professional details</p>
+
+            <div class="reg-field">
+              <label for="reg-category">Service category <span aria-label="required">*</span></label>
+              <div class="reg-select-wrapper">
+                <select id="reg-category" name="category" required>
+                  <option value="">Choose your primary skill</option>
+                  <option value="plumbing">Plumbing</option>
+                  <option value="electrical">Electrical work</option>
+                  <option value="cleaning">Home cleaning</option>
+                  <option value="cooking">Cooking &amp; daily help</option>
+                  <option value="carpentry">Carpentry</option>
+                  <option value="painting">Painting</option>
+                  <option value="other">Other</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="reg-field">
+              <label for="reg-experience">Experience level <span aria-label="required">*</span></label>
+              <div class="reg-select-wrapper">
+                <select id="reg-experience" name="experience" required>
+                  <option value="">Select experience</option>
+                  <option value="beginner">Less than 1 year</option>
+                  <option value="intermediate">1–3 years</option>
+                  <option value="experienced">3–7 years</option>
+                  <option value="expert">7+ years</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="reg-field">
+              <label for="reg-rate">Typical rate <span aria-label="optional">(optional)</span></label>
+              <input
+                id="reg-rate"
+                name="rate"
+                type="text"
+                placeholder="e.g. ₹300 per visit or ₹150/hr"
+                maxlength="100"
+              >
+            </div>
+
+            <div class="reg-field">
+              <label for="reg-availability">Availability</label>
+              <div class="reg-select-wrapper">
+                <select id="reg-availability" name="availability">
+                  <option value="">Select availability</option>
+                  <option value="weekdays">Weekdays only</option>
+                  <option value="weekends">Weekends only</option>
+                  <option value="flexible">Flexible / both</option>
+                  <option value="mornings">Mornings preferred</option>
+                  <option value="evenings">Evenings preferred</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="reg-field full-width">
+              <label for="reg-bio">Skills &amp; description <span aria-label="required">*</span></label>
+              <textarea
+                id="reg-bio"
+                name="bio"
+                placeholder="Describe your skills, experience, tools you have, types of jobs you take on, and anything that helps customers understand your work."
+                required
+                maxlength="500"
+              ></textarea>
+            </div>
+
+            <!-- Section: Account -->
+            <p class="reg-section-title">Create your account</p>
+
+            <div class="reg-field">
+              <label for="reg-password">Password <span aria-label="required">*</span></label>
+              <input
+                id="reg-password"
+                name="password"
+                type="password"
+                autocomplete="new-password"
+                placeholder="At least 8 characters"
+                required
+                minlength="8"
+                maxlength="72"
+              >
+            </div>
+
+            <div class="reg-field">
+              <label for="reg-password-confirm">Confirm password <span aria-label="required">*</span></label>
+              <input
+                id="reg-password-confirm"
+                name="passwordConfirm"
+                type="password"
+                autocomplete="new-password"
+                placeholder="Repeat your password"
+                required
+                minlength="8"
+                maxlength="72"
+              >
+            </div>
+
+            <!-- Submit -->
+            <div class="reg-feedback" id="reg-feedback" role="status" aria-live="polite" aria-atomic="true"></div>
+            <button class="reg-submit" type="submit" id="reg-submit">Register as a worker</button>
+
+          </div>
+        </form>
+
+        <div class="reg-note" role="note">
+          <strong>Note:</strong> Worker registration is stored via the Work Satthi backend API.
+          If the backend is not yet deployed, your submission cannot be saved.
+          Deploy the API and update <code>api.js</code> to connect this form.
+        </div>
+      </div>
+
+      <div class="reg-links">
+        Already have an account? <a href="login.html">Log in here</a> ·
+        <a href="index.html">Back to home</a>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer" role="contentinfo">
+    <div class="wrap footer-main">
+      <a class="brand" href="index.html" aria-label="Work Satthi home">
+        <img class="brand-logo" src="logo.svg" alt="">
+        <span class="brand-text">Work <em>Satthi</em></span>
+      </a>
+      <p class="footer-tagline">Local skills. Trusted hands. Stronger communities.</p>
+      <nav class="footer-links" aria-label="Footer navigation">
+        <a href="services.html">Services</a>
+        <a href="login.html">Login</a>
+        <a href="about.html">About</a>
+      </nav>
+    </div>
+    <div class="wrap footer-bottom">
+      <span>© 2026 Work Satthi</span>
+      <span>Built around people, skills, and local opportunity.</span>
+    </div>
+  </footer>
+
+  <script src="api.js"></script>
+  <script src="script.js"></script>
+  <script src="worker-registration.js"></script>
+</body>
+</html>

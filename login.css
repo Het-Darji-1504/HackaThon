@@ -1,0 +1,33 @@
+/* Work Satthi authentication page — dedicated stylesheet */
+.auth-page{min-height:calc(100vh - 70px);display:grid;grid-template-columns:1fr 1fr;background:#f7f7f1}
+.auth-story{position:relative;overflow:hidden;display:flex;flex-direction:column;justify-content:space-between;padding:clamp(30px,6vw,78px);background:#143d32;color:#fff}
+.auth-story:before,.auth-story:after{content:"";position:absolute;border:1px solid #ffffff1c;border-radius:50%;pointer-events:none}
+.auth-story:before{width:420px;height:420px;right:-180px;top:15%}.auth-story:after{width:300px;height:300px;right:-120px;top:24%}
+.auth-story .brand{color:#fff;position:relative;z-index:1}.auth-story .brand b{color:#d9f078}
+.auth-story-copy{position:relative;z-index:1;max-width:510px;padding:50px 0}
+.auth-kicker{font-size:10px;letter-spacing:2px;font-weight:800;color:#d9f078}
+.auth-story h1{font-size:clamp(38px,5vw,65px);letter-spacing:-2px;line-height:1.07;margin:19px 0;color:#fff}
+.auth-story h1 em{font-style:normal;color:#d9f078}
+.auth-story-copy>p{max-width:420px;color:#d0ddd4;font-size:14px;line-height:1.9}
+.auth-benefits{display:grid;gap:13px;margin-top:27px}.auth-benefits span{font-size:12px;color:#e0e9e2}.auth-benefits b{color:#d9f078;margin-right:8px}
+.auth-story-footer{position:relative;z-index:1;font-size:10px;color:#b4c8bb}
+.auth-panel{display:grid;place-items:center;padding:45px 24px}
+.auth-card{width:min(100%,430px);padding:clamp(24px,4vw,42px);border:1px solid #e3e8df;border-radius:20px;background:#fff;box-shadow:0 20px 60px #143d3210}
+.auth-mobile-brand{display:none}
+.auth-card .eyebrow{margin-bottom:8px}
+.auth-card h2{font-size:32px;letter-spacing:-1px;color:#143d32;margin-bottom:8px}
+.auth-subtitle{font-size:12px;color:#68766e;line-height:1.7;margin-bottom:23px}
+.auth-tabs{display:grid;grid-template-columns:1fr 1fr;gap:4px;padding:4px;background:#f0f3eb;border-radius:10px;margin-bottom:21px}
+.auth-tab{border:0;border-radius:7px;padding:10px;background:transparent;color:#657268;font-size:12px;font-weight:700;cursor:pointer}
+.auth-tab[aria-selected="true"]{background:#fff;color:#143d32;box-shadow:0 2px 8px #143d3210}
+.auth-form{display:grid;gap:14px}.auth-field{display:grid;gap:7px}.auth-field label{font-size:11px;font-weight:700;color:#2e4136}
+.auth-field input,.auth-field select{width:100%;min-height:45px;padding:12px 13px;border:1px solid #dce3d8;border-radius:9px;background:#fff;color:#1a2b25;font:inherit;font-size:12px;outline:none}
+.auth-field input:focus,.auth-field select:focus{border-color:#71905b;box-shadow:0 0 0 3px #71905b20}
+.auth-field input::placeholder{color:#9aa59b}
+.auth-password-row{display:flex;justify-content:space-between;align-items:center;gap:10px}.auth-password-row label{font-size:11px;font-weight:700}.auth-password-row button{border:0;background:none;color:#507542;font-size:10px;font-weight:700;cursor:pointer}
+.auth-submit{width:100%;min-height:47px;margin-top:4px;border:0;border-radius:9px;background:#143d32;color:#fff;font-size:12px;font-weight:800;cursor:pointer;transition:background .2s}.auth-submit:hover{background:#205b49}.auth-submit:focus-visible,.auth-tab:focus-visible{outline:3px solid #91b56c;outline-offset:3px}
+.auth-feedback{display:none;padding:11px 12px;border-radius:9px;background:#f1f5e9;color:#355a30;font-size:11px;line-height:1.65}.auth-feedback.visible{display:block}.auth-disclaimer{margin-top:16px;font-size:10px;color:#7c887e;line-height:1.7;text-align:center}.auth-disclaimer a{color:#3d6940;font-weight:700}
+.auth-divider{display:flex;align-items:center;gap:12px;margin:17px 0;color:#97a196;font-size:10px}.auth-divider:before,.auth-divider:after{content:"";height:1px;background:#e8ece4;flex:1}
+.auth-home-link{display:block;margin-top:20px;text-align:center;font-size:11px;color:#426b3b;font-weight:700}
+@media(max-width:820px){.auth-page{grid-template-columns:1fr}.auth-story{display:none}.auth-panel{min-height:calc(100vh - 70px);padding:35px 18px}.auth-mobile-brand{display:flex;justify-content:center;margin-bottom:24px}.auth-mobile-brand .brand{font-size:21px}}
+@media(max-width:420px){.auth-card{padding:24px 19px}.auth-card h2{font-size:28px}}

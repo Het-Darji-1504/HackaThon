@@ -1,0 +1,492 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#143D32">
+  <meta name="description" content="Work Satthi connects you with trusted local service professionals for home repairs, cleaning, cooking, and more. Hyperlocal. Fair. Accessible.">
+  <title>Work Satthi — Local work. Trusted hands.</title>
+  <link rel="icon" href="logo.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- ====================================================================
+       SITE HEADER
+       ==================================================================== -->
+  <header class="site-header">
+    <nav class="nav wrap" aria-label="Main navigation">
+      <a class="brand" href="index.html" aria-label="Work Satthi home">
+        <img class="brand-logo" src="logo.svg" alt="">
+        <span class="brand-text">Work <em>Satthi</em></span>
+      </a>
+
+      <button
+        class="menu-toggle"
+        id="menu-toggle"
+        aria-label="Open navigation menu"
+        aria-expanded="false"
+        aria-controls="nav-links"
+      >
+        <span class="menu-toggle-icon" aria-hidden="true">
+          <span></span>
+          <span></span>
+          <span></span>
+        </span>
+      </button>
+
+      <div class="nav-links" id="nav-links" role="list">
+        <a href="index.html" role="listitem">Home</a>
+        <a href="community.html" role="listitem">Explore map</a>
+        <a href="services.html" role="listitem">Services</a>
+        <a href="index.html#how" role="listitem">How It Works</a>
+        <a href="index.html#workers" role="listitem">For Workers</a>
+        <a href="index.html#impact" role="listitem">Our Impact</a>
+        <a href="about.html" role="listitem">About</a>
+      </div>
+
+      <a class="nav-cta" href="profile.html" aria-label="Your profile or login">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/>
+        </svg>
+        <span>Profile</span>
+      </a>
+    </nav>
+  </header>
+
+  <!-- ====================================================================
+       MAIN CONTENT
+       ==================================================================== -->
+  <main>
+
+    <!-- HERO SECTION -->
+    <section class="hero wrap" id="home" aria-labelledby="hero-heading">
+      <div class="hero-copy">
+        <p class="eyebrow">
+          <span class="eyebrow-dot" aria-hidden="true"></span>
+          Good people. Right in your neighbourhood.
+        </p>
+
+        <h1 id="hero-heading">Local work.<br><em>Trusted hands.</em></h1>
+
+        <p class="hero-text">
+          Everyday help should be easy to find, fair to afford, and safe to arrange.
+          Connect with nearby service professionals for home repairs, cleaning,
+          cooking, and more.
+        </p>
+
+        <div class="hero-actions">
+          <a class="button button-primary" href="services.html">
+            Find a service
+            <span class="button-arrow" aria-hidden="true">→</span>
+          </a>
+          <a class="button button-secondary" href="login.html?mode=signup&amp;role=worker">
+            I offer a service
+          </a>
+        </div>
+
+        <div class="trust-note" role="note">
+          <span class="trust-check" aria-hidden="true">✓</span>
+          <p>
+            <strong>Local connections make a difference.</strong><br>
+            More convenience for customers. More opportunities for workers.
+          </p>
+        </div>
+      </div>
+
+      <!-- Hero visual panel -->
+      <div class="hero-visual" aria-hidden="true">
+        <div class="hero-visual-bg"></div>
+
+        <div class="hero-card">
+          <div class="hero-card-top">
+            <div class="hero-pin">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/>
+              </svg>
+            </div>
+            <div>
+              <b>Help is closer than you think</b>
+              <small>Discover skills in your area</small>
+            </div>
+          </div>
+
+          <p class="hero-label">Popular local services</p>
+
+          <div class="hero-service-row">
+            <div class="hero-service-icon icon-plum">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#5E8040" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M5 12h14M12 5l7 7-7 7"/>
+              </svg>
+            </div>
+            <div class="hero-service-text">
+              <b>Plumbing</b>
+              <small>Leaks, taps &amp; repairs</small>
+            </div>
+            <span class="hero-service-arrow" aria-hidden="true">↗</span>
+          </div>
+
+          <div class="hero-service-row">
+            <div class="hero-service-icon icon-elec">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#B0860A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+              </svg>
+            </div>
+            <div class="hero-service-text">
+              <b>Electrical work</b>
+              <small>Repairs &amp; installation</small>
+            </div>
+            <span class="hero-service-arrow" aria-hidden="true">↗</span>
+          </div>
+
+          <div class="hero-service-row">
+            <div class="hero-service-icon icon-clean">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#2E7D68" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M3 21l9-9m-5-5l11 11M14.5 4.5l5 5M7 3l2 2-7 7-2-2z"/>
+              </svg>
+            </div>
+            <div class="hero-service-text">
+              <b>Home cleaning</b>
+              <small>One-time or scheduled</small>
+            </div>
+            <span class="hero-service-arrow" aria-hidden="true">↗</span>
+          </div>
+
+          <div class="hero-service-row">
+            <div class="hero-service-icon icon-cook">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#A0551E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M3 11h18M11 11V7a2 2 0 0 0-4 0v4M17 11V7a2 2 0 0 0-4 0v4M3 11l1 10h16l1-10"/>
+              </svg>
+            </div>
+            <div class="hero-service-text">
+              <b>Cooking &amp; daily help</b>
+              <small>Skills for everyday life</small>
+            </div>
+            <span class="hero-service-arrow" aria-hidden="true">↗</span>
+          </div>
+
+          <div class="hero-card-footer">
+            <span class="hero-footer-check" aria-hidden="true">✓</span>
+            Clear agreements. Local opportunity.
+          </div>
+        </div>
+
+        <div class="hero-floating">
+          <div class="hero-floating-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#5E8040" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+            </svg>
+          </div>
+          <div>
+            <b>Trust comes first</b>
+            <small>Safety-focused by design</small>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PRINCIPLES STRIP -->
+    <section class="principles" aria-label="Platform principles">
+      <div class="wrap principles-grid">
+        <article class="principle-item">
+          <div class="principle-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/>
+            </svg>
+          </div>
+          <div>
+            <b>Nearby connections</b>
+            <small>Discover local skills</small>
+          </div>
+        </article>
+
+        <article class="principle-item">
+          <div class="principle-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/>
+            </svg>
+          </div>
+          <div>
+            <b>Fair, clear pricing</b>
+            <small>Discuss before work begins</small>
+          </div>
+        </article>
+
+        <article class="principle-item">
+          <div class="principle-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+            </svg>
+          </div>
+          <div>
+            <b>Trust &amp; safety</b>
+            <small>Encourage verification and feedback</small>
+          </div>
+        </article>
+
+        <article class="principle-item">
+          <div class="principle-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M22 12h-4l-3 9L9 3l-3 9H2"/>
+            </svg>
+          </div>
+          <div>
+            <b>More opportunities</b>
+            <small>Help workers get noticed</small>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- SERVICES SECTION -->
+    <section class="section wrap" id="services" aria-labelledby="services-heading">
+      <div class="section-heading">
+        <p class="eyebrow">Everyday services, closer to home</p>
+        <h2 id="services-heading">Whatever the task,<br><em>there's a local skill for it.</em></h2>
+        <p>Find help for household jobs, repairs, and routine chores. Arrange a time and agree on the work clearly.</p>
+      </div>
+
+      <div class="service-grid">
+
+        <article class="service-card">
+          <div class="service-card__illustration service-card__illustration--plumbing">
+            <img
+              src="assets/illustrations/plumbing.svg"
+              alt="Illustration of a plumbing sink and tools"
+              loading="lazy"
+              decoding="async"
+            >
+          </div>
+          <p class="service-card__label">01 / Repairs</p>
+          <h3>Plumbing</h3>
+          <p class="service-card__desc">Leaks, taps, fittings, and common water-related repairs.</p>
+          <a class="service-card__link" href="services.html?category=repairs">
+            Find help
+            <span aria-hidden="true">→</span>
+          </a>
+        </article>
+
+        <article class="service-card">
+          <div class="service-card__illustration service-card__illustration--electrical">
+            <img
+              src="assets/illustrations/electrical.svg"
+              alt="Illustration of an electrical switch panel"
+              loading="lazy"
+              decoding="async"
+            >
+          </div>
+          <p class="service-card__label">02 / Home</p>
+          <h3>Electrical Work</h3>
+          <p class="service-card__desc">Household repairs and installation by skilled workers.</p>
+          <a class="service-card__link" href="services.html?category=home">
+            Find help
+            <span aria-hidden="true">→</span>
+          </a>
+        </article>
+
+        <article class="service-card">
+          <div class="service-card__illustration service-card__illustration--cleaning">
+            <img
+              src="assets/illustrations/cleaning.svg"
+              alt="Illustration of a mop and cleaning bucket"
+              loading="lazy"
+              decoding="async"
+            >
+          </div>
+          <p class="service-card__label">03 / Cleaning</p>
+          <h3>Home Cleaning</h3>
+          <p class="service-card__desc">One-time cleaning or scheduled help to keep spaces fresh.</p>
+          <a class="service-card__link" href="services.html?category=cleaning">
+            Find help
+            <span aria-hidden="true">→</span>
+          </a>
+        </article>
+
+        <article class="service-card">
+          <div class="service-card__illustration service-card__illustration--cooking">
+            <img
+              src="assets/illustrations/cooking.svg"
+              alt="Illustration of a pot on a stovetop"
+              loading="lazy"
+              decoding="async"
+            >
+          </div>
+          <p class="service-card__label">04 / Daily Help</p>
+          <h3>Cooking &amp; More</h3>
+          <p class="service-card__desc">Connect with local cooks and people with everyday skills.</p>
+          <a class="service-card__link" href="services.html?category=daily-help">
+            Find help
+            <span aria-hidden="true">→</span>
+          </a>
+        </article>
+
+      </div>
+
+      <p class="availability-note">
+        <span class="availability-note-dot" aria-hidden="true">●</span>
+        Booking requests are sent to the platform and remain pending until availability is confirmed.
+      </p>
+    </section>
+
+    <!-- HOW IT WORKS -->
+    <section class="how-section" id="how" aria-labelledby="how-heading">
+      <div class="wrap how-grid">
+        <div>
+          <p class="eyebrow">A simple, fair process</p>
+          <h2 id="how-heading">From "I need help"<br>to <em>"job done."</em></h2>
+          <p class="body-copy">
+            A straightforward way for customers and workers to discuss a job,
+            agree on a fair price, and choose a suitable time.
+          </p>
+        </div>
+
+        <ol class="steps-list">
+          <li class="step-item">
+            <span class="step-number" aria-hidden="true">01</span>
+            <div>
+              <h3>Describe the job</h3>
+              <p>Create an account and submit a service request with details of what you need.</p>
+            </div>
+          </li>
+          <li class="step-item">
+            <span class="step-number" aria-hidden="true">02</span>
+            <div>
+              <h3>Discover nearby professionals</h3>
+              <p>Browse worker profiles by skill and local area to find the right person.</p>
+            </div>
+          </li>
+          <li class="step-item">
+            <span class="step-number" aria-hidden="true">03</span>
+            <div>
+              <h3>Discuss and agree on pricing</h3>
+              <p>Talk through rates and expectations before any work begins.</p>
+            </div>
+          </li>
+          <li class="step-item">
+            <span class="step-number" aria-hidden="true">04</span>
+            <div>
+              <h3>Confirm a suitable time</h3>
+              <p>Submit a preferred date and time. Availability is confirmed by the platform.</p>
+            </div>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- WORKER RECRUITMENT -->
+    <section class="worker-section wrap" id="workers" aria-labelledby="workers-heading">
+      <div class="worker-art" aria-hidden="true">
+        <img
+          class="worker-art-illustration"
+          src="assets/illustrations/worker.svg"
+          alt=""
+        >
+        <span class="worker-art-label">Your skills have value</span>
+      </div>
+
+      <div class="worker-copy">
+        <p class="eyebrow">For local service professionals</p>
+        <h2 id="workers-heading">Your skills deserve<br><em>more opportunities.</em></h2>
+        <p>
+          Work Satthi helps local workers reach nearby customers, share their rates,
+          and build a reputation through reliable service.
+        </p>
+
+        <ul class="worker-benefits" aria-label="Benefits of joining">
+          <li>
+            <span class="benefit-check" aria-hidden="true">✓</span>
+            Create a worker profile and list your skills
+          </li>
+          <li>
+            <span class="benefit-check" aria-hidden="true">✓</span>
+            Share your service area and typical rate
+          </li>
+          <li>
+            <span class="benefit-check" aria-hidden="true">✓</span>
+            Help customers in your area discover your work
+          </li>
+          <li>
+            <span class="benefit-check" aria-hidden="true">✓</span>
+            No listing fees — free to join and get started
+          </li>
+        </ul>
+
+        <a class="button button-primary" href="worker-registration.html">
+          Join as a worker
+          <span class="button-arrow" aria-hidden="true">→</span>
+        </a>
+      </div>
+    </section>
+
+    <!-- SOCIAL IMPACT -->
+    <section class="impact-section" id="impact" aria-labelledby="impact-heading">
+      <div class="wrap impact-grid">
+        <div>
+          <p class="eyebrow">Our social impact</p>
+          <h2 id="impact-heading">When local work grows,<br><em>communities grow with it.</em></h2>
+          <p class="body-copy">
+            Reliable help should be easier to find, and skilled workers should have
+            more ways to find work than word of mouth alone. We want to bring these
+            needs together in one accessible, hyperlocal platform.
+          </p>
+
+          <div class="impact-points">
+            <div class="impact-point">
+              <b>01 · Access</b>
+              <small>Make everyday services easier to discover and arrange.</small>
+            </div>
+            <div class="impact-point">
+              <b>02 · Dignity</b>
+              <small>Support fair pay and genuine respect for workers.</small>
+            </div>
+            <div class="impact-point">
+              <b>03 · Trust</b>
+              <small>Encourage safer bookings and open communication.</small>
+            </div>
+          </div>
+        </div>
+
+        <blockquote class="impact-quote">
+          <p class="impact-quote-mark" aria-hidden="true">"</p>
+          <p>Technology works best when it connects people to opportunity — right where they live.</p>
+          <small>Work Satthi · Social Impact</small>
+        </blockquote>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ====================================================================
+       FOOTER
+       ==================================================================== -->
+  <footer class="footer" role="contentinfo">
+    <div class="wrap footer-main">
+      <a class="brand" href="index.html" aria-label="Work Satthi home">
+        <img class="brand-logo" src="logo.svg" alt="">
+        <span class="brand-text">Work <em>Satthi</em></span>
+      </a>
+
+      <p class="footer-tagline">Local skills. Trusted hands. Stronger communities.</p>
+
+      <nav class="footer-links" aria-label="Footer navigation">
+        <a href="services.html">Services</a>
+        <a href="index.html#how">How It Works</a>
+        <a href="index.html#workers">For Workers</a>
+        <a href="worker-registration.html">Register as Worker</a>
+        <a href="login.html">Login</a>
+        <a href="about.html">About</a>
+      </nav>
+    </div>
+
+    <div class="wrap footer-bottom">
+      <span>© 2026 Work Satthi</span>
+      <span>Built around people, skills, and local opportunity.</span>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

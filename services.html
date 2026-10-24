@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#143D32">
+  <meta name="description" content="Browse all local services available on Work Satthi — plumbing, electrical, cleaning, cooking, carpentry, painting and more.">
+  <title>Services — Work Satthi</title>
+  <link rel="icon" href="logo.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="site-header">
+    <nav class="nav wrap" aria-label="Main navigation">
+      <a class="brand" href="index.html" aria-label="Work Satthi home">
+        <img class="brand-logo" src="logo.svg" alt="">
+        <span class="brand-text">Work <em>Satthi</em></span>
+      </a>
+
+      <button
+        class="menu-toggle"
+        id="menu-toggle"
+        aria-label="Open navigation menu"
+        aria-expanded="false"
+        aria-controls="nav-links"
+      >
+        <span class="menu-toggle-icon" aria-hidden="true">
+          <span></span><span></span><span></span>
+        </span>
+      </button>
+
+      <div class="nav-links" id="nav-links" role="list">
+        <a href="index.html" role="listitem">Home</a>
+        <a href="services.html" role="listitem" aria-current="page">Services</a>
+        <a href="index.html#how" role="listitem">How It Works</a>
+        <a href="index.html#workers" role="listitem">For Workers</a>
+        <a href="about.html" role="listitem">About</a>
+      </div>
+
+      <a class="nav-cta" href="profile.html" aria-label="Your profile or login">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/>
+        </svg>
+        <span>Profile</span>
+      </a>
+    </nav>
+  </header>
+
+  <!-- HERO -->
+  <section class="services-hero" aria-labelledby="services-page-heading">
+    <div class="wrap">
+      <p class="eyebrow">All services</p>
+      <h1 id="services-page-heading">Find the right skill<br><em>right in your area.</em></h1>
+      <p>Browse available services, search by name, or filter by category to find the help you need.</p>
+
+      <div class="services-search-bar" role="search">
+        <label for="services-search-input" class="visually-hidden">Search services</label>
+        <input
+          class="services-search-input"
+          id="services-search-input"
+          type="search"
+          placeholder="Search services, e.g. plumbing…"
+          autocomplete="off"
+          aria-label="Search services"
+        >
+        <button class="services-search-btn" id="services-search-btn" type="button">Search</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTENT -->
+  <div class="services-content">
+    <div class="wrap services-layout">
+
+      <!-- Sidebar filters -->
+      <aside class="services-filters" aria-label="Service categories">
+        <div class="filter-group">
+          <h2>Categories</h2>
+          <div class="filter-list" role="list">
+            <button class="filter-btn is-active" data-category="all" type="button" role="listitem">
+              <span class="filter-btn-dot" aria-hidden="true"></span>
+              All services
+            </button>
+            <button class="filter-btn" data-category="repairs" type="button" role="listitem">
+              <span class="filter-btn-dot" aria-hidden="true"></span>
+              Repairs
+            </button>
+            <button class="filter-btn" data-category="home" type="button" role="listitem">
+              <span class="filter-btn-dot" aria-hidden="true"></span>
+              Home
+            </button>
+            <button class="filter-btn" data-category="cleaning" type="button" role="listitem">
+              <span class="filter-btn-dot" aria-hidden="true"></span>
+              Cleaning
+            </button>
+            <button class="filter-btn" data-category="daily-help" type="button" role="listitem">
+              <span class="filter-btn-dot" aria-hidden="true"></span>
+              Daily Help
+            </button>
+          </div>
+        </div>
+      </aside>
+
+      <!-- Services main area -->
+      <main aria-label="Service listings">
+        <div class="services-grid-header">
+          <h2 id="services-grid-title">All services</h2>
+          <span class="services-count" id="services-count" aria-live="polite" aria-atomic="true">6 services</span>
+        </div>
+
+        <div class="services-main-grid" id="services-grid" aria-label="Service cards">
+          <!-- Populated by services.js -->
+        </div>
+
+        <div class="services-disclaimer" role="note">
+          <strong>About this listing</strong>
+          This page displays the services available on the Work Satthi platform.
+          Individual worker availability, pricing, and response times depend on registered workers
+          in your area. This is currently a demonstration — connect the backend API to see live worker listings.
+        </div>
+      </main>
+
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="footer" role="contentinfo">
+    <div class="wrap footer-main">
+      <a class="brand" href="index.html" aria-label="Work Satthi home">
+        <img class="brand-logo" src="logo.svg" alt="">
+        <span class="brand-text">Work <em>Satthi</em></span>
+      </a>
+      <p class="footer-tagline">Local skills. Trusted hands. Stronger communities.</p>
+      <nav class="footer-links" aria-label="Footer navigation">
+        <a href="services.html">Services</a>
+        <a href="index.html#how">How It Works</a>
+        <a href="worker-registration.html">Register as Worker</a>
+        <a href="login.html">Login</a>
+        <a href="about.html">About</a>
+      </nav>
+    </div>
+    <div class="wrap footer-bottom">
+      <span>© 2026 Work Satthi</span>
+      <span>Built around people, skills, and local opportunity.</span>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+  <script src="services.js"></script>
+</body>
+</html>
