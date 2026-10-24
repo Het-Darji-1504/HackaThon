@@ -160,13 +160,51 @@
         </div>
       </section>
 
+      <section class="dash-card dashboard-map-card" id="report-issue-card" aria-labelledby="report-issue-heading">
+        <p class="eyebrow">Community issue reporting</p>
+        <h2 id="report-issue-heading">Report a local problem</h2>
+        <p class="dash-muted">Submit a category and location. The report is saved to Supabase and added to the map when location lookup succeeds.</p>
+        <form id="report-issue-form" class="dash-form">
+          <label>Problem type
+            <select name="issueType" required>
+              <option value="">Choose a problem</option>
+              <option value="road_damage">🕳️ Road damage / pothole</option>
+              <option value="garbage">🗑️ Garbage / illegal dumping</option>
+              <option value="water_leak">💧 Water leakage / pipe burst</option>
+              <option value="streetlight">💡 Broken streetlight</option>
+              <option value="electrical_hazard">⚡ Exposed wire / electrical hazard</option>
+              <option value="drainage">🚰 Blocked drain / flooding</option>
+              <option value="other">📍 Other civic issue</option>
+            </select>
+          </label>
+          <label>Short title
+            <input name="title" type="text" required maxlength="120" placeholder="e.g. Large pothole near the bus stop">
+          </label>
+          <label>Exact locality or address
+            <input name="location" type="text" required maxlength="240" placeholder="Area, landmark, city, state">
+          </label>
+          <label>Details
+            <textarea name="description" required maxlength="1200" placeholder="Describe what is wrong and any visible impact"></textarea>
+          </label>
+          <label>Priority
+            <select name="priority" required><option value="normal">Normal</option><option value="high">High — needs prompt attention</option><option value="urgent">Urgent — potential immediate danger</option></select>
+          </label>
+          <button class="dash-button" type="submit">Submit issue report</button>
+          <p class="dash-message" id="issue-report-message" role="status" aria-live="polite"></p>
+        </form>
+      </section>
+
       <section class="dash-card dashboard-map-card" id="india-map-section" aria-labelledby="india-map-heading">
-        <p class="eyebrow">Explore nearby help</p><h2 id="india-map-heading">Explore services across India</h2>
-        <p class="dash-muted">Search for a city or locality to explore the map. Worker pins can be added when profiles store verified map coordinates.</p>
+        <p class="eyebrow">Explore nearby help</p><h2 id="india-map-heading">Community issue map across India</h2>
+        <p class="dash-muted">Reports submitted by the community appear here with category-specific symbols. Search a location or select a marker to review an issue.</p>
         <form id="india-map-search" class="dash-form dashboard-map-search"><label for="india-map-location">City or locality</label>
           <div class="dashboard-map-search-row"><input id="india-map-location" name="location" type="text" placeholder="e.g. Ahmedabad, Gujarat" value="India"><button class="dash-button" type="submit">Find on map</button></div>
         </form>
-        <div id="india-map" class="dashboard-india-map" role="region" aria-label="Interactive map of India"></div>
+                <div class="issue-map-legend" aria-label="Map symbol legend">
+          <span>🕳️ Road damage</span><span>🗑️ Garbage</span><span>💧 Water leak</span><span>💡 Streetlight</span><span>⚡ Electrical hazard</span><span>🚰 Drainage</span><span>📍 Other</span>
+        </div>
+        <p class="dash-muted">For immediate danger, contact local emergency or civic authorities. Map reports help track issues; they do not automatically dispatch a response.</p>
+<div id="india-map" class="dashboard-india-map" role="region" aria-label="Interactive map of India"></div>
         <p id="india-map-message" class="dash-message" role="status" aria-live="polite">Search a city to zoom in on the map.</p>
       </section>
 
@@ -199,8 +237,8 @@
         .catch(function () { return; })
         .then(function () { return loadScript('https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2'); })
         .catch(function () { return loadScript('https://unpkg.com/@supabase/supabase-js@2'); })
-        .then(function () { return loadScript('supabase-config.js'); })
-        .then(function () { return loadScript('dashboard.js'); })
+        .then(function () { return loadScript('supabase-config.js?v=20261024-3'); })
+        .then(function () { return loadScript('dashboard.js?v=20261024-3'); })
         .catch(function (error) {
           var message = document.getElementById('profile-message');
           if (message) {
