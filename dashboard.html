@@ -160,6 +160,16 @@
         </div>
       </section>
 
+      <section class="dash-card dashboard-map-card" id="india-map-section" aria-labelledby="india-map-heading">
+        <p class="eyebrow">Explore nearby help</p><h2 id="india-map-heading">Explore services across India</h2>
+        <p class="dash-muted">Search for a city or locality to explore the map. Worker pins can be added when profiles store verified map coordinates.</p>
+        <form id="india-map-search" class="dash-form dashboard-map-search"><label for="india-map-location">City or locality</label>
+          <div class="dashboard-map-search-row"><input id="india-map-location" name="location" type="text" placeholder="e.g. Ahmedabad, Gujarat" value="India"><button class="dash-button" type="submit">Find on map</button></div>
+        </form>
+        <div id="india-map" class="dashboard-india-map" role="region" aria-label="Interactive map of India"></div>
+        <p id="india-map-message" class="dash-message" role="status" aria-live="polite">Search a city to zoom in on the map.</p>
+      </section>
+
       <!-- Bookings list card (customer only) -->
       <section class="dash-card" id="bookings-card" aria-labelledby="bookings-card-heading">
         <h2 id="bookings-card-heading">Your booking requests</h2>
@@ -171,8 +181,9 @@
     </div>
   </main>
 
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
   <script>
-    // Load Supabase with a CDN fallback, then load config and dashboard in order.
+    // Load Leaflet map and Supabase libraries before dashboard code.
     (function () {
       function loadScript(url) {
         return new Promise(function (resolve, reject) {
@@ -183,7 +194,10 @@
           document.head.appendChild(script);
         });
       }
-      loadScript('https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2')
+      loadScript('https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.js')
+        .catch(function () { return loadScript('https://unpkg.com/leaflet@1.9.4/dist/leaflet.js'); })
+        .catch(function () { return; })
+        .then(function () { return loadScript('https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2'); })
         .catch(function () { return loadScript('https://unpkg.com/@supabase/supabase-js@2'); })
         .then(function () { return loadScript('supabase-config.js'); })
         .then(function () { return loadScript('dashboard.js'); })
