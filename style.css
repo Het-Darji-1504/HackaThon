@@ -2893,3 +2893,15 @@ textarea.community-control { resize: vertical; min-height: 110px; }
 .dashboard-map-search-row { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 12px; align-items: end; }
 .dashboard-india-map { width: 100%; min-height: 390px; border: 1px solid var(--line); border-radius: var(--radius-lg); overflow: hidden; background: #eaf0e5; z-index: 0; }
 @media (max-width: 600px) { .dashboard-map-search-row { grid-template-columns: 1fr; } .dashboard-india-map { min-height: 300px; } }
+
+/* Civic issue reporting and category-specific map symbols */
+.issue-map-legend { display: flex; flex-wrap: wrap; gap: 9px; margin: 16px 0; }
+.issue-map-legend span { padding: 7px 10px; border: 1px solid var(--line); border-radius: 999px; background: var(--white); font-size: 12px; }
+.issue-marker-wrap { background: transparent; border: 0; }
+.issue-marker { display: grid; place-items: center; width: 36px; height: 36px; border: 2px solid #fff; border-radius: 50%; background: #143D32; box-shadow: 0 2px 8px rgba(0,0,0,.28); font-size: 19px; line-height: 1; }
+.issue-map-popup { max-width: 260px; font-family: var(--font-stack); color: var(--ink); }
+.issue-map-popup strong { display: block; margin-bottom: 7px; font-size: 14px; }
+.issue-map-popup p { margin: 5px 0; font-size: 12px; line-height: 1.45; overflow-wrap: anywhere; }
+.issue-map-popup small { display: block; margin-top: 8px; color: var(--muted); font-size: 11px; line-height: 1.45; }
+#report-issue-form { max-width: 760px; }
+#report-issue-form button:disabled { opacity: .65; cursor: wait; }
