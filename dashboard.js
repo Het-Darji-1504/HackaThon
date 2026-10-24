@@ -125,13 +125,12 @@
   }
 
   const ISSUE_TYPES = {
-    road_damage: { icon: '🕳️', label: 'Road damage / pothole', advice: 'Avoid the damaged area if safe and report it to the local municipal road department.' },
-    garbage: { icon: '🗑️', label: 'Garbage / illegal dumping', advice: 'Report it to the municipal sanitation or solid-waste team.' },
-    water_leak: { icon: '💧', label: 'Water leakage / pipe burst', advice: 'Report the leak to the local water-supply authority; keep clear of fast-flowing water.' },
-    streetlight: { icon: '💡', label: 'Broken streetlight', advice: 'Report the pole/location to the municipal street-lighting team.' },
-    electrical_hazard: { icon: '⚡', label: 'Electrical hazard', advice: 'Keep away; do not touch exposed wires. Contact the electricity provider or emergency services immediately if danger is present.' },
-    drainage: { icon: '🚰', label: 'Blocked drain / flooding', advice: 'Report it to the municipal drainage team and avoid floodwater where possible.' },
-    other: { icon: '📍', label: 'Other civic issue', advice: 'Send the location and details to the relevant local civic authority.' }
+    plumbing: { icon: '🔧', label: 'Plumbing', advice: 'A Work Satthi plumber can assess leaks, taps, pipes, and other plumbing work.' },
+    electrical: { icon: '⚡', label: 'Electrical work', advice: 'Use a qualified electrician. Stay away from exposed wires and electrical hazards.' },
+    cleaning: { icon: '🧹', label: 'Home cleaning', advice: 'A Work Satthi cleaning professional can help with household cleaning.' },
+    cooking: { icon: '🍳', label: 'Cooking & daily help', advice: 'Arrange a suitable Work Satthi cooking or daily-help professional.' },
+    carpentry: { icon: '🪚', label: 'Carpentry', advice: 'A Work Satthi carpenter can assess furniture, fittings, and woodwork.' },
+    painting: { icon: '🎨', label: 'Painting', advice: 'A Work Satthi painting professional can assess the surface and work required.' }
   };
   let issueMap = null;
   let issueMarkers = null;
