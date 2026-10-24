@@ -137,12 +137,24 @@
   function escapeHtml(value) {
     return String(value == null ? '' : value).replace(/[&<>"']/g, (ch) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[ch]));
   }
+  function normalizedServiceType(type) {
+    const aliases = {
+      water_leak: 'plumbing',
+      electrical_hazard: 'electrical',
+      streetlight: 'electrical',
+      garbage: 'cleaning',
+      drainage: 'cleaning',
+      road_damage: 'carpentry',
+      other: 'cleaning'
+    };
+    return ISSUE_TYPES[type] ? type : (aliases[type] || 'cleaning');
+  }
   function issueIcon(type) {
-    const item = ISSUE_TYPES[type] || ISSUE_TYPES.other;
-    return window.L.divIcon({ className: 'issue-marker-wrap', html: '<span class="issue-marker" aria-label="' + escapeHtml(item.label) + '">' + item.icon + '</span>', iconSize: [38, 38], iconAnchor: [19, 19], popupAnchor: [0, -18] });
+    const item = ISSUE_TYPES[normalizedServiceType(type)];
+    return window.L.divIcon({ className: 'issue-marker-wrap', html: '<span class="issue-marker" role="img" aria-label="' + escapeHtml(item.label) + '">' + item.icon + '</span>', iconSize: [38, 38], iconAnchor: [19, 19], popupAnchor: [0, -18] });
   }
   function issuePopup(issue) {
-    const item = ISSUE_TYPES[issue.issue_type] || ISSUE_TYPES.other;
+    const item = ISSUE_TYPES[normalizedServiceType(issue.issue_type)];
     const status = String(issue.status || 'reported').replace(/_/g, ' ');
     return '<div class="issue-map-popup"><strong>' + item.icon + ' ' + escapeHtml(issue.title) + '</strong><p>' + escapeHtml(item.label) + ' · ' + escapeHtml(issue.priority || 'normal') + ' priority</p><p>' + escapeHtml(issue.location_text) + '</p><p>Status: ' + escapeHtml(status) + '</p><p>' + escapeHtml(issue.description) + '</p><small>Suggested next step: ' + escapeHtml(item.advice) + '</small></div>';
   }
