@@ -123,7 +123,37 @@
       article.append(h, detail, status); results.append(article);
     });
   }
-  const profileForm = $('profile-form');
+
+  function initIndiaMap() {
+    const mapEl = $('india-map'), form = $('india-map-search'), message = $('india-map-message');
+    if (!mapEl || !form) return;
+    if (!window.L) { if (message) message.textContent = 'Map library unavailable. Check your connection and refresh.'; return; }
+    const map = window.L.map(mapEl, { scrollWheelZoom: false }).setView([22.9734, 78.6569], 4);
+    window.L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 18, attribution: '&copy; OpenStreetMap contributors' }).addTo(map);
+    let marker = null;
+    form.addEventListener('submit', async function (event) {
+      event.preventDefault();
+      const place = String($('india-map-location').value || '').trim();
+      if (!place) { if (message) message.textContent = 'Enter a city or locality.'; return; }
+      if (message) message.textContent = 'Searching map…';
+      try {
+        const response = await fetch('https://nominatim.openstreetmap.org/search?format=jsonv2&limit=1&q=' + encodeURIComponent(place));
+        if (!response.ok) throw new Error('Map search is temporarily unavailable.');
+        const results = await response.json();
+        if (!results.length) { if (message) message.textContent = 'Location not found. Try a city name and state.'; return; }
+        const found = results[0]; map.setView([Number(found.lat), Number(found.lon)], 12);
+        if (marker) marker.remove();
+        marker = window.L.marker([Number(found.lat), Number(found.lon)]).addTo(map).bindPopup(found.display_name).openPopup();
+        if (message) message.textContent = 'Showing ' + found.display_name + '. Worker pins require saved worker coordinates.';
+      } catch (error) { if (message) message.textContent = error.message || 'Map search failed.'; }
+    });
+    if ('IntersectionObserver' in window) {
+      const observer = new IntersectionObserver(function (entries) { if (entries.some(function (entry) { return entry.isIntersecting; })) map.invalidateSize(); });
+      observer.observe(mapEl);
+    }
+  }
+
+    const profileForm = $('profile-form');
   profileForm?.addEventListener('submit', async (e) => {
     e.preventDefault(); setMessage('profile-message', 'Saving profile…');
     try {
@@ -213,6 +243,7 @@
       if (error) throw error;
       if (!data.session) { window.location.href = 'login.html'; return; }
       currentUser = data.session.user;
+      initIndiaMap();
       await loadServices();
       await loadProfile(currentUser);
       if (profile.role === 'customer') await loadBookings();
