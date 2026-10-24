@@ -165,16 +165,15 @@
         <h2 id="report-issue-heading">Report a local problem</h2>
         <p class="dash-muted">Submit a category and location. The report is saved to Supabase and added to the map when location lookup succeeds.</p>
         <form id="report-issue-form" class="dash-form">
-          <label>Problem type
+          <label>Service needed
             <select name="issueType" required>
               <option value="">Choose a problem</option>
-              <option value="road_damage">🕳️ Road damage / pothole</option>
-              <option value="garbage">🗑️ Garbage / illegal dumping</option>
-              <option value="water_leak">💧 Water leakage / pipe burst</option>
-              <option value="streetlight">💡 Broken streetlight</option>
-              <option value="electrical_hazard">⚡ Exposed wire / electrical hazard</option>
-              <option value="drainage">🚰 Blocked drain / flooding</option>
-              <option value="other">📍 Other civic issue</option>
+              <option value="plumbing">🔧 Plumbing</option>
+              <option value="electrical">⚡ Electrical work</option>
+              <option value="cleaning">🧹 Home cleaning</option>
+              <option value="cooking">🍳 Cooking &amp; daily help</option>
+              <option value="carpentry">🪚 Carpentry</option>
+              <option value="painting">🎨 Painting</option>
             </select>
           </label>
           <label>Short title
@@ -200,10 +199,9 @@
         <form id="india-map-search" class="dash-form dashboard-map-search"><label for="india-map-location">City or locality</label>
           <div class="dashboard-map-search-row"><input id="india-map-location" name="location" type="text" placeholder="e.g. Ahmedabad, Gujarat" value="India"><button class="dash-button" type="submit">Find on map</button></div>
         </form>
-                <div class="issue-map-legend" aria-label="Map symbol legend">
-          <span>🕳️ Road damage</span><span>🗑️ Garbage</span><span>💧 Water leak</span><span>💡 Streetlight</span><span>⚡ Electrical hazard</span><span>🚰 Drainage</span><span>📍 Other</span>
+                <div class="issue-map-legend" aria-label="Work Satthi service symbol legend">
+          <span>🔧 Plumbing</span><span>⚡ Electrical work</span><span>🧹 Cleaning</span><span>🍳 Cooking &amp; daily help</span><span>🪚 Carpentry</span><span>🎨 Painting</span>
         </div>
-        <p class="dash-muted">For immediate danger, contact local emergency or civic authorities. Map reports help track issues; they do not automatically dispatch a response.</p>
 <div id="india-map" class="dashboard-india-map" role="region" aria-label="Interactive map of India"></div>
         <p id="india-map-message" class="dash-message" role="status" aria-live="polite">Search a city to zoom in on the map.</p>
       </section>
