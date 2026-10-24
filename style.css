@@ -2886,3 +2886,10 @@ textarea.community-control { resize: vertical; min-height: 110px; }
   .reports-filter-label .community-control { min-width: 0; }
   .coordinate-row { gap: 10px; }
 }
+
+/* Responsive interactive map near the bottom of the dashboard */
+.dashboard-map-card { grid-column: 1 / -1; margin-top: 8px; }
+.dashboard-map-search { max-width: 680px; margin-block: 18px; }
+.dashboard-map-search-row { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 12px; align-items: end; }
+.dashboard-india-map { width: 100%; min-height: 390px; border: 1px solid var(--line); border-radius: var(--radius-lg); overflow: hidden; background: #eaf0e5; z-index: 0; }
+@media (max-width: 600px) { .dashboard-map-search-row { grid-template-columns: 1fr; } .dashboard-india-map { min-height: 300px; } }
