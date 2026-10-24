@@ -68,8 +68,32 @@
       }).select().single());
       profile = inserted;
     } else profile = p;
+    // Older accounts may have a profile row but be missing the worker_profiles row.
+    // Do not silently treat these users as disconnected: initialise the worker row when
+    // the trusted profile role is already worker, then load it for editing.
     if (profile.role === 'worker') {
       const w = failIfError(await client.from('worker_profiles').select('*, services(slug,name)').eq('user_id', user.id).maybeSingle());
+      if (!w) {
+        const serviceSlug = user.user_metadata?.service || '';
+        const service = services.find((item) => item.slug === serviceSlug);
+        const created = failIfError(await client.from('worker_profiles').upsert({
+          user_id: user.id,
+          service_id: service?.id || null,
+          service_area: profile.area || user.user_metadata?.area || null,
+          city: profile.area || user.user_metadata?.area || null,
+          hourly_rate: null,
+          experience_years: 0,
+          bio: '',
+          is_listed: true
+        }, { onConflict: 'user_id' }).select('*, services(slug,name)').single());
+        profile.worker = created ? {
+          ...created,
+          service_slug: created.services?.slug || serviceSlug,
+          experience_level: 'beginner'
+        } : null;
+        applyProfile();
+        return;
+      }
       profile.worker = w ? {
         ...w,
         service_slug: w.services?.slug || '',
@@ -168,7 +192,7 @@
       let query = client.from('worker_profiles').select('user_id,bio,experience_years,service_area,city,hourly_rate,availability_summary,profiles!inner(full_name,phone),services(slug,name)').eq('is_listed', true);
       if (area) query = query.or('service_area.ilike.%' + area.replace(/[%_]/g, '') + '%,city.ilike.%' + area.replace(/[%_]/g, '') + '%');
       const rows = failIfError(await query.limit(50));
-      const filtered = (rows || []).filter((w) => !q || (w.services?.name || w.custom_service || '').toLowerCase().includes(q) || w.bio.toLowerCase().includes(q));
+      const filtered = (rows || []).filter((w) => !q || (w.services?.name || w.custom_service || '').toLowerCase().includes(q) || (w.bio || '').toLowerCase().includes(q));
       results.innerHTML = '';
       if (!filtered.length) { results.textContent = 'No matching worker profiles yet. Try another service or area.'; return; }
       filtered.forEach((w) => {
@@ -193,7 +217,8 @@
       await loadProfile(currentUser);
       if (profile.role === 'customer') await loadBookings();
     } catch (err) {
-      setMessage('profile-message', (err.message || 'Could not load your profile.') + ' Check that the Work Satthi Supabase tables and policies are installed.', true);
+      const detail = err && (err.message || err.details || err.hint || err.code);
+      setMessage('profile-message', 'Supabase connection reached, but dashboard setup failed: ' + (detail || 'Unknown error') + '. Check the Supabase tables, row-level security policies, and whether the latest dashboard.js has deployed.', true);
     }
   })();
 }());
