@@ -2905,3 +2905,7 @@ textarea.community-control { resize: vertical; min-height: 110px; }
 .issue-map-popup small { display: block; margin-top: 8px; color: var(--muted); font-size: 11px; line-height: 1.45; }
 #report-issue-form { max-width: 760px; }
 #report-issue-form button:disabled { opacity: .65; cursor: wait; }
+
+/* Work Satthi service-only map legend */
+.issue-map-legend { display: flex; flex-wrap: wrap; gap: 9px; margin: 16px 0; }
+.issue-map-legend span { padding: 7px 10px; border: 1px solid var(--line); border-radius: 999px; background: var(--white); font-size: 12px; }
