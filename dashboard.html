@@ -171,8 +171,30 @@
     </div>
   </main>
 
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  <script src="supabase-config.js"></script>
-  <script src="dashboard.js"></script>
+  <script>
+    // Load Supabase with a CDN fallback, then load config and dashboard in order.
+    (function () {
+      function loadScript(url) {
+        return new Promise(function (resolve, reject) {
+          var script = document.createElement('script');
+          script.src = url;
+          script.onload = resolve;
+          script.onerror = function () { script.remove(); reject(new Error('Could not load ' + url)); };
+          document.head.appendChild(script);
+        });
+      }
+      loadScript('https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2')
+        .catch(function () { return loadScript('https://unpkg.com/@supabase/supabase-js@2'); })
+        .then(function () { return loadScript('supabase-config.js'); })
+        .then(function () { return loadScript('dashboard.js'); })
+        .catch(function (error) {
+          var message = document.getElementById('profile-message');
+          if (message) {
+            message.textContent = 'Could not load Supabase scripts or configuration. Check your internet connection and that supabase-config.js is deployed in the same folder. Details: ' + error.message;
+            message.classList.add('is-error');
+          }
+        });
+    }());
+  </script>
 </body>
 </html>
