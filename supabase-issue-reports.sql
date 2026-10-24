@@ -4,7 +4,7 @@
 create table if not exists public.issue_reports (
   id uuid primary key default gen_random_uuid(),
   reporter_id uuid not null references auth.users(id) on delete cascade,
-  issue_type text not null check (issue_type in ('road_damage','garbage','water_leak','streetlight','electrical_hazard','drainage','other')),
+  issue_type text not null check (issue_type in ('plumbing','electrical','cleaning','cooking','carpentry','painting')),
   title text not null check (char_length(title) between 3 and 120),
   description text not null check (char_length(description) between 3 and 1200),
   location_text text not null check (char_length(location_text) between 3 and 240),
